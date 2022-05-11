@@ -1,12 +1,12 @@
 from infrastructure import File
-from controller import Parcer, Coincidence
+from controller import Parser, Coincidence
 import os
 if __name__== '__main__':
-    direcction= os.getcwd()+'/infrastructure/data2.txt' 
-    dataset = File(direcction)
+    path= os.getcwd()+'/infrastructure/data2.txt' 
+    dataset = File(path)
     result = []
     for data in dataset.data_file():
-        user_data = Parcer(data)
+        user_data = Parser(data)
         if user_data.validate(user_data.data):
             schedule = []
             for i in user_data.parceSchedule():

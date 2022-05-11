@@ -1,7 +1,7 @@
 from datetime import datetime
 import pytest
-from controller import Parcer
-from domain import Schedule, User
+from controller import Parser
+from domain import Schedule
 
 
 
@@ -13,23 +13,23 @@ from domain import Schedule, User
         ('ANDRES=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00', 'ANDRES'),
     ]
 )
-def test_parcer_user(data, expected_name):
-    parcer = Parcer(data)  
+def test_parser_user(data, expected_name):
+    parser = Parser(data)  
 
-    result = parcer.parcerUser().name
+    result = parser.user.name
     
     assert result == expected_name
 
 
-def test_parce_schedule():
+def test_parser_schedule():
     expected_schedules = [
         Schedule('MO',datetime(1,1,1,10,0), datetime(1,1,1,12,0)),
         Schedule('TH',datetime(1,1,1,12,0), datetime(1,1,1,14,0)),
         Schedule('SU',datetime(1,1,1,20,0), datetime(1,1,1,21,0)),
       ]
-    parcer = Parcer('ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00')  
+    parser = Parser('ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00')  
     
-    results = parcer.parceSchedule()
+    results = parser.parceSchedule()
 
     assert all([expected.day == result.day for expected, result in zip(expected_schedules, results) ])
     assert all([expected.start.hour == result.start.hour for expected, result in zip(expected_schedules, results)] ) 

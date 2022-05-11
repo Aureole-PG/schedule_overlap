@@ -1,6 +1,6 @@
 from infrastructure import File
 import os
-test_file = os.getcwd()+'/test/test.txt'
+path_test = os.getcwd()+'/test/test.txt'
 rows=[
     '1'
     '1',
@@ -8,17 +8,17 @@ rows=[
 ]
 
 def _create():
-    with open(test_file, 'w', newline='') as test:
+    with open(path_test, 'w', newline='') as test:
         for lines in rows:
             test.write(lines + os.linesep)
 
 def _remove():
-    os.remove(test_file)
+    os.remove(path_test)
 
 def test_read_file():
     _create()
     
-    file_readed = File(test_file)
-    result =file_readed.data_file()
+    test_file = File(path_test)
+    result =test_file.data_file()
     assert result == rows 
     _remove()

@@ -11,6 +11,4 @@ class File:
             for line in f:
                 data.append(line.rstrip())
         return data
-    def direcctory(self):
-        return os.getcwd()
 
